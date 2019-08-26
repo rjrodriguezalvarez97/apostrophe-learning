@@ -9,3 +9,15 @@
     </div>
   </div>
 {% endblock %}
+
+{% block main %}
+  <div class="main-content">
+    {{
+      apos.area(data.page, 'drawers', {
+        widgets: {
+          drawer: {}
+        }
+      })
+    }}
+  </div>
+{% endblock %}
