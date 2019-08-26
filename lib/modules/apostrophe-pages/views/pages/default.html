@@ -13,6 +13,13 @@
 {% block main %}
   <div class="main-content">
     {{
+      apos.area(data.page,'twoColumnArea', {
+        widgets: {
+          'two-column': {}
+        }
+      })
+    }}
+    {{
       apos.area(data.page, 'drawers', {
         widgets: {
           drawer: {}
