@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}{{ data.page.title }}{% endblock %}
+
+{% block main %}
+<div class="banner-top">
+</div>
+  {% for piece in data.pieces %}
+  <div class="container">
+    <h4>
+      {% set image = apos.images.first(piece.thumbnail) %}
+      {% if image %}
+        <img src="{{ apos.attachments.url(image, { size: 'one-sixth' }) }}" />
+      {% endif %}
+      <a href="{{ piece._url }}">{{ piece.title }}</a>
+    </h4>
+  
+  </div>
+  {% endfor %}
+  {% import 'apostrophe-pager:macros.html' as pager with context %}
+  {{ pager.render({ page: data.currentPage, total: data.totalPages }, data.url) }}
+{% endblock %}
+

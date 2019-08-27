@@ -31,12 +31,40 @@ var apos = require('apostrophe')({
           name: 'home',
           label: 'Home'
         },
+        {
+          name: 'people-page',
+          label: 'People'
+        }
       ]
     },
     'link-widgets': {},
     'page-link-widgets': {},
     'drawer-widgets': {},
-    'two-column-widgets': {}
+    'two-column-widgets': {},
+    'people': {},
+    'people-widgets': {
+      extend: 'apostrophe-pieces-widgets',
+      filters: {
+        projection: {
+          title: 1,
+          phone: 1,
+          thumbnail: 1,
+          // Not a real database property, but including it in the projection
+          // fetches everything needed to populate it
+          _url: 1,
+        }
+      }
+    },
+    'people-pages': {
+      extend: 'apostrophe-pieces-pages',
+      construct: function(self, options) {
+        var superPushAssets = self.pushAssets;
+        self.pushAssets = function() {
+          superPushAssets();
+          self.pushAsset('stylesheet', 'always', { when: 'always' });
+        };
+      }   
+    }
 
   }
 });
