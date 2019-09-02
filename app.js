@@ -34,6 +34,10 @@ var apos = require('apostrophe')({
         {
           name: 'people-page',
           label: 'People'
+        },
+        {
+          name: 'jobs-page',
+          label: 'Jobs'
         }
       ]
     },
@@ -64,7 +68,13 @@ var apos = require('apostrophe')({
           self.pushAsset('stylesheet', 'always', { when: 'always' });
         };
       }   
-    }
+    },
+    'jobs': {
+      extend: 'apostrophe-pieces'
+    },
+    'jobs-pages': {
+      extend: 'apostrophe-pieces-pages'
+    },
 
   }
 });

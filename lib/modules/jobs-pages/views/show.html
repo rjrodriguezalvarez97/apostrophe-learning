@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}{{ data.piece.title }}{% endblock %}
+
+{% block main %}
+
+    <div class="banner-top">
+    </div>
+
+    <div class="container">
+        <h2>Description of {{ data.piece.title }}</h2>
+            {{ apos.singleton(data.piece, 'description', 'apostrophe-rich-text') }}
+    </div>
+
+{% endblock %}
