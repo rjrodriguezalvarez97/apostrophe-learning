@@ -56,6 +56,8 @@ var apos = require('apostrophe')({
           // Not a real database property, but including it in the projection
           // fetches everything needed to populate it
           _url: 1,
+          _job: 1
+
         }
       }
     },

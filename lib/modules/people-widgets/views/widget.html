@@ -19,5 +19,10 @@
         }
       )
     }}
+    {% if piece._job %}
+    <h4>
+      Position: <a href="{{ piece._job._url }}">{{ piece._job.title }}</a>
+    </h4>
+    {% endif %}
   </h4>
 {% endfor %}
