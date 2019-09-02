@@ -2,10 +2,18 @@
 {% block title %}{{ data.piece.title }}{% endblock %}
 
 {% block main %}
+<div class="container">
 <h2>{{ data.piece.title }}
-{{ apos.singleton(data.piece, 'thumbnail', 'apostrophe-images') }}
+{{ apos.singleton(data.piece, 'thumbnail', 'apostrophe-images', {
+
+})
+ }}
 </h2>
+{% for job in data.piece._jobs %}
+  <h4>
+    Position: <a href="{{ job._url }}">{{ job.title }}</a>
+  </h4>
+{% endfor %} 
+</div>
 
-
-{{ apos.area(data.piece, 'body') }}
 {% endblock %}
