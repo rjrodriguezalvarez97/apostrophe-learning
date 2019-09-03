@@ -3,9 +3,29 @@
 
 {% block main %}
 <div class="banner-top">
+  
 </div>
+  <div class="container">
+    {# Link to all the tags, adding a parameter to the query string #}
+    <ul class="tag-filters">
+    <h5> Tags </h5>
+      {% for tag in data.piecesFilters.tags %}
+        <li>
+          {% if data.query.tags == tag.value %}
+            <a href="{{ data.url | build({ tags: '' }) }}" class="current">
+          {% else %}
+            <a href="{{ data.url | build({ tags: tag.value }) }}">
+          {% endif %}
+            {{ tag.label }} ({{ tag.count }})
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+  </div>
   {% for piece in data.pieces %}
   <div class="container">
+      
     <h4>
       {% set image = apos.images.first(piece.thumbnail) %}
       {% if image %}
