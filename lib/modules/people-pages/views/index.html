@@ -5,39 +5,11 @@
 <div class="banner-top">
   
 </div>
-  <div class="container">
-    {# Link to all the tags, adding a parameter to the query string #}
 
-<ul class="job-filters">
-  <h5>Jobs</h5>
-  {% for job in data.piecesFilters.jobs %}
-    {% if apos.utils.contains(data.query.jobs, job.value) %}
-      <a href="{{ data.url | build({ jobs: { $pull: job.value } }) }}" class="current">
-    {% else %}
-      <a href="{{ data.url | build({ jobs: { $addToSet: job.value } }) }}">
-    {% endif %}
-      {{ job.label }}
-    </a>
-  {% endfor %}
-</ul>
-
-  </div>
-  {% for piece in data.pieces %}
-  <div class="container">
-      
-    <h4>
-      {% set image = apos.images.first(piece.thumbnail) %}
-      {% if image %}
-        <img src="{{ apos.attachments.url(image, { size: 'one-sixth' }) }}" />
-      {% endif %}
-      <a href="{{ piece._url }}">{{ piece.title }}</a>
-      {% if piece._job.title %}
-      <p>Work as: {{ piece._job.title }}</p>
-      {% endif %}
-    </h4>
   
+  <div data-apos-ajax-context="people">
+    {% include "indexAjax.html" %}
   </div>
-  {% endfor %}
   {% import 'apostrophe-pager:macros.html' as pager with context %}
   {{ pager.render({ page: data.currentPage, total: data.totalPages }, data.url) }}
 {% endblock %}

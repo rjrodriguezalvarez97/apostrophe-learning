@@ -1,0 +1,40 @@
+  <div class="container">
+    {# Link to all the tags, adding a parameter to the query string #}
+  
+    <ul class="job-filters">
+      <h5>Jobs</h5>
+      {% for job in data.piecesFilters.jobs %}
+        {% if apos.utils.contains(data.query.jobs, job.value) %}
+          <a href="{{ data.url | build({ jobs: { $pull: job.value } }) }}" class="current">
+        {% else %}
+          <a href="{{ data.url | build({ jobs: { $addToSet: job.value } }) }}">
+        {% endif %}
+          {{ job.label }}
+        </a>
+      {% endfor %}
+    </ul>
+
+  </div>
+
+<div data-apos-ajax-append class="container"> 
+{% for piece in data.pieces %}      
+<h4>
+  {% set image = apos.images.first(piece.thumbnail) %}
+  {% if image %}
+    <img src="{{ apos.attachments.url(image, { size: 'one-sixth' }) }}" />
+  {% endif %}
+  <a href="{{ piece._url }}">{{ piece.title }}</a>
+  {% if piece._job.title %}
+  <p>Work as: {{ piece._job.title }}</p>
+  {% endif %}
+</h4>
+{% endfor %}
+</div>
+<p> Data.currentPage: {{ data.currentPage }}</p>
+<p> Data.totalPages: {{ data.totalPages }}</p>
+
+{# Load More button. Also outside data-apos-ajax-append, so it gets refreshed #}
+{% if data.currentPage < data.totalPages %}
+  {# "Load More" button with the "append=1" flag #}
+  <a class="container" href="{{ data.url | build({ page: data.currentPage + 1, append: 1 }) }}">Load More...</a>
+{% endif %}
